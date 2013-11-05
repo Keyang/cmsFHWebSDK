@@ -10,7 +10,7 @@ cms.service = (function(module) {
    * Get content from CMS and save to localstorage.
    */
 
-  function _sync() {
+  function sync() {
     cms.model.getAppStructure(function(err, res) {
       if(err) {
         console.log('Failed to get CMS updated content');
@@ -28,17 +28,17 @@ cms.service = (function(module) {
   }
 
   // TODO Handle device events, 'resume' etc
-  function _startPoll(seconds) {
+  function startPoll(seconds) {
     // Clear old timers
-    _stopPoll();
+    stopPoll();
 
     // New timer
     timerId = setInterval(function() {
-      _sync();
+      sync();
     }, seconds * 1000);
   }
 
-  function _stopPoll() {
+  function stopPoll() {
     clearInterval(timerId);
   }
 
