@@ -15,11 +15,13 @@ cms.service = (function(module) {
       if(err) {
         console.log('Failed to get CMS updated content');
       }
-      console.log('Got updated CMS content');
+      console.log('Got updated CMS content.');
 
       cms.model.create(cms.model.KEYS.AppStructure, res, function(err, res) {
         if(!err) {
           console.log('Saved CMS content to localstorage');
+        } else {
+          console.log('Failed to save CMS content to localstorage');
         }
       });
     });
