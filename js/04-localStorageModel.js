@@ -55,6 +55,13 @@ cms.model = (function(module) {
    */
 
   function _create(key, data, callback) {
+    // Callback is optional
+    callback = callback || function(err) {
+      if(err) {
+        console.log('Failed to save to local storage for key: ' + key, data);
+      }
+    };
+
     stringifyJson(data, function(err, json) {
       if (err) {
         return callback(err, null);
