@@ -17,7 +17,7 @@ cms.model=(function(module){
 
     function getAppStructure(cb){
         var param={
-            "alias":cms.alias
+            "alias":cms.app.alias
         }
         _act("getAppStructure",param,cb);
     }
