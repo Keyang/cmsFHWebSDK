@@ -1,10 +1,45 @@
-cms.service=(function(module){
-    module.sync=sync;// sync content
-    module.startPoll=startPoll; //seconds as parameter
-    module.stopPoll=stopPoll;
+cms.service = (function(module) {
+  module.sync = sync; // sync content
+  module.startPoll = startPoll; //seconds as parameter
+  module.stopPoll = stopPoll;
+
+  // Time when the app should check for an update
+  var timerId = null;
+
+  /**
+   * Get content from CMS and save to localstorage.
+   */
+
+  function _sync() {
+    cms.model.getAppStructure(function(err, res) {
+      if(err) {
+        console.log('Failed to get CMS updated content');
+      }
+      console.log('Got updated CMS content');
+
+      cms.model.create(cms.model.KEYS.AppStructure, res, function(err, res) {
+        if(!err) {
+          console.log('Saved CMS content to localstorage');
+        }
+      });
+    });
+  }
+
+  // TODO Handle device events, 'resume' etc
+  function _startPoll(seconds) {
+    // Clear old timers
+    _stopPoll();
+
+    // New timer
+    timerId = setInterval(function() {
+      _sync();
+    }, seconds * 1000);
+  }
+
+  function _stopPoll() {
+    clearInterval(timerId);
+  }
 
 
-
-
-    return module;
+  return module;
 })(cms.service || {});
