@@ -58,20 +58,7 @@ cms.data = (function(module) {
 
 
   function getRSSFeed(feedId, callback) {
-
-    function constructRssKey(feedId) {
-      return 'rss_' + feedId;
-    }
-
-    cms.model.getRSSFeed(extraId, function(err, res) {
-      if (err) {
-        return cms.model.read(constructRssKey(feedId), callback);
-      }
-
-      // Save the content to local storage
-      cms.model.create(constructRssKey(feedId), res);
-
-      return callback(null, res);
+    getContentExtra("import","json","rss",feedId,cb);
     });
   }
 
