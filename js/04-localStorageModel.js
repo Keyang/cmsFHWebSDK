@@ -3,6 +3,9 @@ cms.model = (function(module) {
   // Public functions
   module.create = _create;
   module.read = _read;
+  module.KEYS = {
+    AppStructure: 'AppStructure'
+  };
 
 
   /**
@@ -40,7 +43,7 @@ cms.model = (function(module) {
       act: 'load',
       key: key
     }, function(res) {
-      return parseToJson(res, callback);
+      return parseToJson(res.val, callback);
     }, function(msg, err) {
       return callback(err, null);
     });

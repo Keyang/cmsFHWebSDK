@@ -35,8 +35,11 @@ cms.model=(function(module){
         $fh.act({
             "act":name,
             "req":param
-        },cb,function(err){
+        },function(res){
+            cb(null,res);
+        },function(err){
             console.log(err);
+            cb(err, null);
         });
     }
 
