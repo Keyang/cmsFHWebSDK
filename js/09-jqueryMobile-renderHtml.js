@@ -1,7 +1,7 @@
 cms.ui.jqueryMobile=(function(module){
     module.renderHtml=renderHtml;
 
-    function renderHtml(category){
+    function renderHtml(element,cb){
         
     }
 

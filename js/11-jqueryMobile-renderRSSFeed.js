@@ -1,7 +1,7 @@
 cms.ui.jqueryMobile=(function(module){
     module.renderRSSFeed=renderRSSFeed;
 
-    function renderRSSFeed(category){
+    function renderRSSFeed(element,cb){
         
     }
 
