@@ -9,10 +9,10 @@ cms.ui.jqueryMobile=(function(module){
             var html = '<div class="renderHtml" data-role="page" id="' + alias + '" data-position="fixed">' +
             '<div data-role="header"><h2>' + title + '</h2></div>' +
             '<div data-role="content">' +
-            content+
+            content.content+
             '</div>' +
             '</div>';
-            cb(null,content);
+            cb(null,html);
         });
     }
 

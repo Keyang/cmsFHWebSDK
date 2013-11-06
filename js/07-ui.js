@@ -2,33 +2,43 @@ cms.ui = (function(module) {
     module.setRenderer = setRenderer;
     module.render = render;
     module.registerType = registerType;
-    module.getHtml=getHtml;
-    module.initUi=initUi;
+    module.getHtml = getHtml;
+    module.initUi = initUi;
     var renderer = null;
     var registeredType = {};
     var uis = {};
-    function getHtml(alias){
+
+    function getHtml(alias) {
         return uis[alias];
     }
+
     function setRenderer(_renderer) {
         renderer = _renderer;
     }
 
     function render(element, cb) {
         var alias = element.alias;
+
         if (registeredType[alias]) {
             return registeredType[alias](element, cb);
         }
         if (element.children) { //list
             return renderer.renderList(element, cb);
-        } else if (element.cat == "core") {
-            if (element.cat == "html") {
-                return renderer.renderHtml(element, cb);
+        } else {
+            var cat=element.cat;
+            var type=element.type;
+            var template=element.template;
+            if (cat == "core") {
+                if (type == "html" && template=="html") {
+                    return renderer.renderHtml(element, cb);
+                }
+            } else if (cat == "template") {
+
+            } else if (cat == "import") {
+                if (template=="rss"){
+                    return renderer.renderRSS(element,cb);
+                }
             }
-        } else if (element.cat == "template") {
-
-        } else if (element.cat == "import") {
-
         }
         return renderer.defaultRender(element, cb);
     }
@@ -38,10 +48,12 @@ cms.ui = (function(module) {
     }
 
     function initUi(cb) {
+        renderer.init();
         cms.data.getAppStructure(function(err, appStructure) {
             var root = appStructure.content;
-            _recursiveParseApp(root,cb);
+            _recursiveParseApp(root, cb);
         });
+
     }
 
     function _recursiveParseApp(element, cb) {
@@ -63,7 +75,7 @@ cms.ui = (function(module) {
 
                     });
                 }
-                if (elementCount==0){
+                if (elementCount == 0) {
                     cb();
                 }
             } else {
