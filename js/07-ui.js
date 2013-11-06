@@ -63,6 +63,9 @@ cms.ui = (function(module) {
 
                     });
                 }
+                if (elementCount==0){
+                    cb();
+                }
             } else {
                 cb();
             }
