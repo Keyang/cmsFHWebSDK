@@ -42,7 +42,7 @@ cms.data = (function(module) {
   }
 
 
-  function getContentExtra(cat, type, template, extraId, cb) {
+  function getContentExtra(cat, type, template, extraId, callback) {
 
     function constructExtraKey(arr) {
       var key = '';
@@ -72,7 +72,7 @@ cms.data = (function(module) {
 
 
   function getRSSFeed(feedId, callback) {
-    getContentExtra("import", "json", "rss", feedId, cb);
+    getContentExtra("import", "json", "rss", feedId, callback);
   }
 
 
