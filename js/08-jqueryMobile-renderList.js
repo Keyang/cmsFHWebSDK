@@ -15,7 +15,7 @@ cms.ui.jqueryMobile = (function(module) {
             '<div data-role="header"><h2>' + title + '</h2></div>' +
             '<div data-role="content">' +
             '<ul data-role="listview" data-inset="true">' +
-            innerHtml '</ul>' +
+            innerHtml+'</ul>' +
             '</div>' +
             '</div>';
         cb(null,html);

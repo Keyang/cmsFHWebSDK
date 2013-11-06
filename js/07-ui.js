@@ -69,4 +69,4 @@ cms.ui = (function(module) {
 
     }
     return module;
-})(com.ui || {});
+})(cms.ui || {});
