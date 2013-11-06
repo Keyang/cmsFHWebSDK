@@ -1,11 +1,17 @@
 var cms=(function(module){
-    module.setApplication=setApplication;
     module.init=init;
-    function setApplication(app){
+    /**
+     * init cms sdk
+     * app={
+     *     "alias":""
+     * 
+     * }
+     * @param  {[type]} app [description]
+     * @return {[type]}     [description]
+     */
+    function init(app){
+        cms.ui.setRenderer(cms.ui.jqueryMobile);
         module.app=app;
-    }
-    function init(){
-
     }
     return module;
 })(cms ||{});
