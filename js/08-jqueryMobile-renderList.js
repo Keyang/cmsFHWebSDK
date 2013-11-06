@@ -9,7 +9,7 @@ cms.ui.jqueryMobile = (function(module) {
         for (var key in children) {
             var ele = children[key];
             var eleName = ele.name;
-            innerHtml += "<li><a href='#" + key + "'>" + eleName + "</a></li>";
+            innerHtml += "<li><a href='#' data-nav='"+key+"'>" + eleName + "</a></li>";
         }
         var html = '<div class="renderList" data-role="page" id="' + alias + '" data-position="fixed">' +
             '<div data-role="header"><h2>' + title + '</h2></div>' +
