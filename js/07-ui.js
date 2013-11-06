@@ -2,11 +2,13 @@ cms.ui = (function(module) {
     module.setRenderer = setRenderer;
     module.render = render;
     module.registerType = registeredType;
-
+    module.getHtml=getHtml;
     var renderer = null;
     var registeredType = {};
     var uis = {};
-
+    function getHtml(alias){
+        return uis[alias];
+    }
     function setRenderer(_renderer) {
         renderer = _renderer;
     }

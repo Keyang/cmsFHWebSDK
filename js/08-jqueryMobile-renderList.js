@@ -11,7 +11,7 @@ cms.ui.jqueryMobile = (function(module) {
             var eleName = ele.name;
             innerHtml += "<li><a href='#" + key + "'>" + eleName + "</a></li>";
         }
-        var html = '<div data-role="page" id="' + alias + '">' +
+        var html = '<div class="renderList" data-role="page" id="' + alias + '" data-position="fixed">' +
             '<div data-role="header"><h2>' + title + '</h2></div>' +
             '<div data-role="content">' +
             '<ul data-role="listview" data-inset="true">' +
