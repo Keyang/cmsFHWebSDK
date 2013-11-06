@@ -10,31 +10,42 @@ cms.service = (function(module) {
    * Get content from CMS and save to localstorage.
    */
 
-  function sync() {
+  function sync(callback) {
     cms.model.getAppStructure(function(err, res) {
-      if(err) {
-        console.log('Failed to get CMS updated content');
+      if (err) {
+        return callback(err, null);
       }
-      console.log('Got updated CMS content.');
 
-      cms.model.create(cms.model.KEYS.AppStructure, res, function(err, res) {
-        if(!err) {
-          console.log('Saved CMS content to localstorage');
+      cms.model.create(cms.model.KEYS.AppStructure, res, function(err, localRes) {
+        if (!err) {
+          return callback(null, res);
         } else {
-          console.log('Failed to save CMS content to localstorage');
+          return callback(err, null);
         }
       });
     });
   }
 
   // TODO Handle device events, 'resume' etc
-  function startPoll(seconds) {
+  function startPoll(seconds, callback) {
+    // Default callback if one isn't provided
+    callback = callback || function(err, res) {
+      if (err) {
+        console.log('Failed to get updated app App Structure via sync: ' + JSON.stringify(err));
+      } else {
+        console.log('Sync success!');
+      }
+    };
+
     // Clear old timers
     stopPoll();
 
-    // New timer
-    timerId = setInterval(function() {
-      sync();
+    timerId = setTimeout(function() {
+      // Callback will fire user callback and next sync...
+      sync(function(err, res) {
+        callback(err, res);
+        startPoll(seconds, callback);
+      });
     }, seconds * 1000);
   }
 
