@@ -38,7 +38,7 @@ cms.ui = (function(module) {
     }
 
     function initUi(cb) {
-        com.daa.getAppStructure(function(err, appStructure) {
+        cms.data.getAppStructure(function(err, appStructure) {
             var root = appStructure.content;
             _recursiveParseApp(root,cb);
         });
