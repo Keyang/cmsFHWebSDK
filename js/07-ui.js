@@ -4,6 +4,8 @@ cms.ui = (function(module) {
     module.registerType = registerType;
     module.getHtml = getHtml;
     module.initUi = initUi;
+    module.loadExtra=loadExtra;
+    
     var renderer = null;
     var registeredType = {};
     var uis = {};
@@ -54,6 +56,20 @@ cms.ui = (function(module) {
             _recursiveParseApp(root, cb);
         });
 
+    }
+    function loadExtra(cat,type,template,extraId,cb){
+        var key=(cat+type+template).toLowerCase();
+        var uid=key+"_"+extraId;
+        if (uis[uid]){
+            cb(null,uis[uid]);
+        }else{
+            renderer.renderExtra[key](extraId,function(err,html){
+                uis[uid]=html;
+
+                cb(null,uid);
+            });    
+        }
+        
     }
 
     function _recursiveParseApp(element, cb) {

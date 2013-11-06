@@ -13,7 +13,7 @@ cms.ui.jqueryMobile=(function(module){
                 for (var i=0;i<content.length;i++){
                     var title=content[i].title;
                     var extraId=content[i]._id;
-                    innerHtml+="<li><a href='#' data-extraId='"+extraId+"'>" + title + "</a></li>";
+                    innerHtml+="<li><a href='#' data-extraType='rss' data-cmscat='import' data-cmstype='json' data-cmstemplate='rss' data-extraId='"+extraId+"'>" + title + "</a></li>";
                 }
             }
             var title=element.name;
