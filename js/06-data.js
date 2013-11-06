@@ -72,7 +72,7 @@ cms.data = (function(module) {
 
 
   function getRSSFeed(feedId, callback) {
-    getContentExtra("import", "json", "rss", feedId, cb);
+    getContentExtra("import", "json", "rss", feedId, callback);
   }
 
 
