@@ -1,7 +1,7 @@
 cms.ui = (function(module) {
     module.setRenderer = setRenderer;
     module.render = render;
-    module.registerType = registeredType;
+    module.registerType = registerType;
     module.getHtml=getHtml;
     var renderer = null;
     var registeredType = {};
