@@ -21,7 +21,7 @@ cms.ui.jqueryMobile.renderExtra = (function(module) {
                 '<div>' +
                 description+
                 '</div>' +
-                '<div data-role="button" onClick="cms.util.webview(\"'+link+'\")">Read Original Feed</div>' +
+                '<div data-role="button" onClick="cms.util.webview(\''+link+'\')">Read Original Feed</div>' +
                 '</div>' +
                 '</div>' +
                 '</div>'
