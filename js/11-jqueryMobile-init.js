@@ -14,7 +14,7 @@ cms.ui.jqueryMobile = (function(module) {
                 var cat = data.cmscat;
                 var type = data.cmstype;
                 var template = data.cmstemplate;
-                var extraId = data.extraId;
+                var extraId = data.extraid;
                 var uid = (cat + type + template).toLowerCase() + "_" + extraId;
                 if ($("#" + uid).length > 0) {
                     cms.app.onNav(uid);

@@ -5,7 +5,7 @@ cms.ui.jqueryMobile.renderExtra = (function(module) {
         cms.data.getContentExtra("import","json","rss",extraId, function(err, content) {
             var title = content.title;
             var description = content.description;
-            var pubdate = content.pubdate;
+            var pubdate = new Date(content.pubdate);
             var dtStr=pubdate.getDate()+"/"+(pubdate.getMonth()+1)+"/"+pubdate.getFullYear();
             var link = content.link;
             var extraId=content._id;
