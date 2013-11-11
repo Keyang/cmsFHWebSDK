@@ -18,6 +18,7 @@ cms.service = (function(module) {
 
       cms.model.create(cms.model.KEYS.AppStructure, res, function(err, localRes) {
         if (!err) {
+          cms.events.emit("synced");
           return callback(null, res);
         } else {
           return callback(err, null);
@@ -27,15 +28,9 @@ cms.service = (function(module) {
   }
 
   // TODO Handle device events, 'resume' etc
-  function startPoll(seconds, callback) {
+  function startPoll(seconds) {
     // Default callback if one isn't provided
-    callback = callback || function(err, res) {
-      if (err) {
-        console.log('Failed to get updated app App Structure via sync: ' + JSON.stringify(err));
-      } else {
-        console.log('Sync success!');
-      }
-    };
+   
 
     // Clear old timers
     stopPoll();
@@ -43,8 +38,7 @@ cms.service = (function(module) {
     timerId = setTimeout(function() {
       // Callback will fire user callback and next sync...
       sync(function(err, res) {
-        callback(err, res);
-        startPoll(seconds, callback);
+          startPoll(seconds);
       });
     }, seconds * 1000);
   }

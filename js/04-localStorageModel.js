@@ -3,6 +3,7 @@ cms.model = (function(module) {
   // Public functions
   module.create = _create;
   module.read = _read;
+  module.remove=_remove;
   module.KEYS = {
     AppStructure: 'AppStructure'
   };
@@ -77,6 +78,12 @@ cms.model = (function(module) {
         return callback(err, null);
       })
     });
+  }
+  function _remove(key,callback){
+      $fh.data({
+        act:"remove",
+        key:key
+      },callback,callback)
   }
 
   return module;

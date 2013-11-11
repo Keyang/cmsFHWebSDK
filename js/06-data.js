@@ -16,9 +16,23 @@ cms.data = (function(module) {
           cms.model.create(contentId, res);
           return callback(null, res);
         });
+      }else{
+        var alias=res.alias;
+        getAppStructure(function(err,app){
+          var curContent=_getContentMetaFromApp(alias,app);  
+          if (curContent==null || curContent.lastUpdate!=res.lastUpdate){//content is not update to date
+            cms.model.remove(contentId,function(){//remove the old one
+              getContent(contentId,callback);
+            });
+          }else{
+            return callback(null, res);      
+          }
+        });
+        
+        
       }
 
-      return callback(null, res);
+      
     });
   }
 
@@ -35,9 +49,11 @@ cms.data = (function(module) {
           cms.model.create(cms.model.KEYS.AppStructure, res);
           return callback(null, res);
         });
+      }else{
+        return callback(null, res);  
       }
 
-      return callback(null, res);
+      
     });
   }
 
@@ -64,13 +80,34 @@ cms.data = (function(module) {
           cms.model.create(constructExtraKey([cat, type, template, extraId]), res);
           return callback(null, res);
         });
+      }else{
+        return callback(null, res);  
       }
-
-      return callback(null, res);
     });
   }
 
-
+  function _getContentMetaFromApp(contentAlias,app){
+    var content=app.content;
+    return _recursiveFindContent(content,contentAlias);
+  }
+  function _recursiveFindContent(listElement,contentAlias){
+    //depth first recursive
+      var rtn=null;
+      for (var key in listElement.children){
+        var obj=listElement.children[key];
+        if (key == contentAlias){ //found the content
+          rtn= obj;
+          break;
+        }else if (obj.children){
+          rtn= _recursiveFindContent(obj,contentAlias);
+          if (rtn!=null){//found in this children
+            break;
+          }
+        }
+      }
+      return rtn;
+    
+  }
   function getRSSFeed(feedId, callback) {
     getContentExtra("import", "json", "rss", feedId, callback);
   }

@@ -9,6 +9,11 @@ cms.ui = (function(module) {
     var renderer = null;
     var registeredType = {};
     var uis = {};
+    cms.events.on("synced",function(){
+        initUi(function(){
+            console.log("UI synced with CMS");
+        });
+    });
 
     function getHtml(alias) {
         return uis[alias];
@@ -25,7 +30,16 @@ cms.ui = (function(module) {
             return registeredType[alias](element, cb);
         }
         if (element.children) { //list
-            return renderer.renderList(element, cb);
+            var children=[];
+            for (var key in element.children){ //flat children
+              children.push(element.children[key]);
+            }
+            if (children.length ==1){//placeholder
+              var child=children[0];
+              return render(child,cb);
+            }else{ //render as a list
+              return renderer.renderList(element, cb);
+            }
         } else {
             var cat=element.cat;
             var type=element.type;
@@ -75,7 +89,10 @@ cms.ui = (function(module) {
     function _recursiveParseApp(element, cb) {
         var alias = element.alias;
         render(element, function(err, html) {
-            uis[alias] = html;
+            if (typeof html =="string"){
+                html= html.replace("%{id}%",alias);
+            }
+            uis[alias] =html;
             if (element.children) {
                 var elementCount = 0;
                 for (var key in element.children) {

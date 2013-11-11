@@ -17,8 +17,8 @@ cms.ui.jqueryMobile=(function(module){
                 }
             }
             var title=element.name;
-            html = '<div class="renderRSS" data-role="page" id="' + alias + '" data-position="fixed">' +
-            '<div data-role="header"><h2>' + title + '</h2></div>' +
+            html = '<div class="renderRSS" data-role="page" id="%{id}%" >' +
+            '<div data-role="header" data-position="fixed"><h2>' + title + '</h2></div>' +
             '<div data-role="content">' +
             '<ul data-role="listview" data-inset="true">' +
             innerHtml+'</ul>' +

@@ -13,7 +13,7 @@ cms.ui.jqueryMobile.renderExtra = (function(module) {
 
             var html = '<div data-role="page" id="'+uid+'">' +
                 '<div data-role="header" data-position="fixed">' +
-                '<h1>Costain News</h1>' +
+                '<h1>Content</h1>' +
                 '</div>' +
                 '<div data-role="content">' +
                 '<h3>'+title+'</h3>' +
@@ -24,7 +24,9 @@ cms.ui.jqueryMobile.renderExtra = (function(module) {
                 '<div data-role="button" onClick="cms.util.webview(\''+link+'\')">Read Original Feed</div>' +
                 '</div>' +
                 '</div>' +
-                '</div>'
+                '</div>';
+
+                cb(null,html);
         });
 
     }
